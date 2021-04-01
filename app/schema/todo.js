@@ -1,8 +1,8 @@
 const { gql } = require("apollo-server-express");
 
-const typeDefs = gql`
-    type Query {
-        todo: Todo
+const todoSchema = gql`
+    extend type Query {
+        todo(id: Int!): Todo
         todos: [Todo]
     }
 
@@ -10,15 +10,15 @@ const typeDefs = gql`
         id: Int
         title: String
         userId: Int
-        comments : [Comment]
+        comments: [Comment]
     }
 
     type Comment {
-        id : Int
-        body : String
+        id: Int
+        body: String
     }
 
-    type Mutation {
+    extend type Mutation {
         createTodo(
             id: Int
             title: String
@@ -31,5 +31,5 @@ const typeDefs = gql`
 `;
 
 module.exports = {
-    typeDefs,
+    todoSchema,
 };
